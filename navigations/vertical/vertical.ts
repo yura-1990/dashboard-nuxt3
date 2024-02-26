@@ -26,7 +26,7 @@ export const vertical = () => {
       title: 'About',
       icon: { name: 'ph:house-light', size: '28' },
       to: { name: 'about' }
-    }, 
+    },
     {
       title: 'Theme',
       icon: { name: 'ph:house-light', size: '28' },

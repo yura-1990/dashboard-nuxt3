@@ -2,14 +2,15 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
-    pageTransition: { name: 'layout', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
 
   modules: [
     '@nuxt/ui',
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@pinia/nuxt',
   ],
 
 })
