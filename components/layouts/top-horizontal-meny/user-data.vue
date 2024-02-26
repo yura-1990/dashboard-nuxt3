@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/store/useAuthStore';
+const { userData, logUserOut, authenticated } = useAuthStore()
+const router = useRouter();
+
+const logout = () => {
+  logUserOut()  
+  router.push('/auth/login/')
+}
+
 const items = [
   [{
-    label: 'ben@example.com',
+    label: userData.email,
     slot: 'account',
     disabled: true
   }], [{
@@ -18,9 +27,11 @@ const items = [
     icon: 'i-heroicons-signal'
   }], [{
     label: 'Sign out',
-    icon: 'i-heroicons-arrow-left-on-rectangle'
+    icon: 'i-heroicons-arrow-left-on-rectangle',
+    click: (e) => logout()
   }]
 ]
+
 </script>
 
 <template>
@@ -38,9 +49,9 @@ const items = [
         </div>
       </template>
 
-      <template #item="{ item }">
+      <template #item="{ item }" >
         <span class="truncate">{{ item.label }}</span>
-
+        
         <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
       </template>
   </UDropdown>

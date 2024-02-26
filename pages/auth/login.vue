@@ -1,21 +1,22 @@
 <script setup lang="ts">
-  import { object, string, type InferType } from 'yup'
-  import type { FormSubmitEvent } from '#ui/types'
-  import { useUserData } from '~/store/useUser'
-  import { decodeJwtToken } from '~/utils/decodeJWT';
-  import { useRouter } from "vue-router";
-  import {onMounted} from "vue";
-  import {useFetch} from "#app";
-  import {useCookie} from "#app/composables/cookie";
-
   definePageMeta({
     layout: 'auth-layout'
   })
 
-  const user = useUserData()
-  const decode = ref({})
-  const router = useRouter()
+  import { storeToRefs } from 'pinia';
+  import { object, string, type InferType } from 'yup'
+  import type { FormSubmitEvent } from '#ui/types'
+  import { useAuthStore } from '~/store/useAuthStore';
 
+  const { authenticateUser } = useAuthStore();
+  const { authenticated } = storeToRefs(useAuthStore());
+
+  const state = reactive({
+    email: undefined,
+    password: undefined
+  })
+
+  const router = useRouter();
 
   const schema = object({
     email: string().email('Invalid email').required('Required'),
@@ -24,58 +25,12 @@
 
   type Schema = InferType<typeof schema>
 
-  const state = reactive({
-    email: undefined,
-    password: undefined
-  })
-
-  onMounted(async ()=>{
-    try {
-      const token = localStorage.getItem('token')
-      if (token){
-        const {data, error} = await useFetch('http://localhost:8000/api/users/me', {
-          method: 'get',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        if (data.value){
-          await router.push({name: 'home'})
-        }
-
-        if (error.value){
-          await router.push({name: 'auth-login'})
-          localStorage.setItem('token', '')
-        }
-
-      }
-    }catch (e){
-      await router.push({name: 'auth-login'})
-      localStorage.setItem('token', '')
-    }
-
-  })
-
   async function onSubmit (event: FormSubmitEvent<Schema>) {
-    const { data } = await useFetch('http://localhost:8000/api/auth/login', {
-      method: 'post',
-      body: {
-        email: event.data.email,
-        password: event.data.password
-      }
-    })
-
-    if (data) {
-      decode.value = await decodeJwtToken(data?.value?.token)
-      user?.fill(decode.value.userData)
-
-      return router.push({name: 'home'})
-
-    } else {
-      return router.push({name: 'auth-login'})
+    await authenticateUser(event.data);
+    
+    if (authenticated) {
+      router.push('/home');
     }
-
   }
 
 </script>
@@ -86,11 +41,11 @@
       <h1 class="text-2xl font-bold text-center">Log in to your account</h1>
       <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" />
+          <UInput v-model="state.email" autocomplete />
         </UFormGroup>
 
         <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
+          <UInput v-model="state.password" type="password" autocomplete />
         </UFormGroup>
 
         <UButton type="submit" class="w-full" block >
@@ -108,7 +63,7 @@
           class="flex items-center dark:bg-[#2F3349FF] dark:text-white justify-center w-full px-4 py-2 space-x-2 text-sm font-medium text-gray-600 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
           type="button"
       >
-        <UIcon name="logos:google-icon" class="w-5 h-5" />
+        <UIcon name="logos:google-icon"  class="w-5 h-5" />
         <span>Sign in with Google</span>
       </button>
       <button

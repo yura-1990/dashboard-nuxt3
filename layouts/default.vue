@@ -8,6 +8,10 @@
     </section>
 </template>
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '~/store/useAuthStore';
+const { authenticated } = storeToRefs(useAuthStore());
+
 </script>
 <style scoped>
 
