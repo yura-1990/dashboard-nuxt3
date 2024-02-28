@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>Home</div>
+  <h1>401 you do not have your right</h1>
 </template>
 
 <style scoped>

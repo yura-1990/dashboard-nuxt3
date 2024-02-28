@@ -21,9 +21,30 @@
 
 <script setup lang="ts">
   import { vertical } from '~/navigations/vertical/vertical'
-
+  import { useAuthStore } from '~/store/useAuthStore'
+  import { storeToRefs } from 'pinia';
+  const { error, permissions } = storeToRefs(useAuthStore());
   const openClose = ref<boolean>(false)
-  const verticalNavigation = computed(()=>vertical())
+
+  const verticalNavigation = computed(()=> {
+    return vertical().filter(route => checkPermissions(route));
+  })
+  function checkPermissions(route: { title: string; icon: { name: string; size: string; }; permissions: string[]; children: ({ title: string; icon: { name: string; size: string; }; permissions: string[]; children: { title: string; icon: { name: string; size: string; }; to: { name: string; target: string; }; permissions: string[]; }[]; to?: undefined; } | { title: string; icon: { name: string; size: string; }; to: { name: string; }; permissions: string[]; children?: undefined; })[]; to?: undefined; } | { title: string; icon: { name: string; size: string; }; to: { name: string; }; permissions: string[]; children?: undefined; }) {
+    if (route.permissions) {
+      for (let permission of route.permissions) {
+        if (!permissions.value.includes(permission)) {
+          return false;
+        }
+      }
+    }
+    if (route.children) {
+      route.children = route.children.filter(childRoute => checkPermissions(childRoute));
+      return route.children.length > 0;
+    }
+
+    return true;
+  }
+
   const hovering = ref<boolean>(true)
 
   onMounted(()=>{
@@ -37,7 +58,6 @@
 
     localStorage.setItem('navbar', JSON.stringify(openClose.value))
     localStorage.setItem('hovering', JSON.stringify(hovering.value))
-
   })
 
   const handleOpenCloseNavbar = () => {
@@ -53,7 +73,6 @@
     }
 
     localStorage.setItem('hovering', JSON.stringify(hovering.value))
-
   }
 
 

@@ -3,13 +3,11 @@
     layout: 'auth-layout'
   })
 
-  import { storeToRefs } from 'pinia';
   import { object, string, type InferType } from 'yup'
   import type { FormSubmitEvent } from '#ui/types'
+  import { storeToRefs } from 'pinia';
   import { useAuthStore } from '~/store/useAuthStore';
-
-  const { authenticateUser } = useAuthStore();
-  const { authenticated } = storeToRefs(useAuthStore());
+  const { authenticated, error, loading, permissions } = storeToRefs(useAuthStore());
 
   const state = reactive({
     email: undefined,
@@ -27,9 +25,9 @@
 
   async function onSubmit (event: FormSubmitEvent<Schema>) {
     await authenticateUser(event.data);
-    
+
     if (authenticated) {
-      router.push('/home');
+      await router.push('/');
     }
   }
 
@@ -38,7 +36,15 @@
 <template>
   <div class="flex items-center justify-center w-full min-h-screen bg-gray-100 dark:bg-[#2f2b3dc7]">
     <div class="w-full max-w-md p-8 space-y-3 rounded-xl bg-white shadow-md dark:bg-[#2F3349FF] border">
-      <h1 class="text-2xl font-bold text-center">Log in to your account</h1>
+      <h1 class="text-2xl font-bold text-center"> Log in to your account</h1>
+      <UAlert
+          v-if="error"
+          icon="i-heroicons-command-line"
+          color="red"
+          variant="solid"
+          title="Error"
+          :description="error"
+      />
       <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" autocomplete />

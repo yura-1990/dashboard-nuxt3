@@ -1,8 +1,14 @@
 <template>
-  <LazyNuxtLayout>
-    <LazyNuxtPage />
-  </LazyNuxtLayout>
+  <div class="h-screen">
+    <LazyNuxtLayout>
+      <LazyNuxtPage />
+    </LazyNuxtLayout>
+    <UNotifications />
+  </div>
 </template>
+<script setup lang="ts">
+
+</script>
 <style>
 .page-enter-active,
 .page-leave-active {

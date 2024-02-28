@@ -1,40 +1,45 @@
 <template>
-  <div v-for="(item, index) in props.children" :key="index">
-    <ULink
-      :to="item.to"
-      class="flex items-center gap-3 mb-1  py-2 pl-4 pr-3 w-full rounded "
-      active-class="active-link text-white dark:text-white"
-      inactive-class="text-black-700 dark:text-white-400 hover:bg-[#8692d00f] hover:text-white-700 dark:hover:text-black-900"
-      @click="handleAccordion(item)"
-    >
-      <div class="flex gap-2" >
-        <div class="w-[30px] flex items-center justify-center">
-          <Icon :name="item.icon.name" :size="item.icon.size" />
-        </div>
-        <span class="font-bold"
-            :class="props.hovering ? 'opacity-100' : 'opacity-0'"
-        >{{ item.title }}</span>
+    <div v-for="(item, index) in props?.children" :key="index">
+      <div>
+        <ULink
+            :to="item?.to"
+            class="flex items-center mb-1  py-2 pl-4 pr-3 w-full rounded "
+            active-class="active-link text-white dark:text-white"
+            inactive-class="text-black-700 dark:text-white-400 hover:bg-[#8692d00f] hover:text-white-700 dark:hover:text-black-900"
+        >
+          <div class="flex gap-2 mr-auto" >
+            <div class="w-[30px] flex items-center justify-center">
+              <Icon :name="item.icon.name" :size="item.icon.size" />
+            </div>
+            <span class="word-shadow text-left overflow-hidden text-ellipsis"
+                  :class="props.hovering ? 'opacity-100' : 'opacity-0'"
+            >{{ item.title }}</span>
+          </div>
+          <div
+              v-if="item.children"
+              @click="handleAccordion(item)"
+          >
+            <Icon name="fe:arrow-right" size="22" :class="!accordions ? 'rotate-90' : 'rotate-0'" class="transition duration-300 ease-in-out"/>
+          </div>
+        </ULink>
       </div>
-      <div
-        class="w-full flex justify-end"
-        v-if="item.children"
-
-      >
-        <Icon name="fe:arrow-right" size="22" :class="!accordions ? 'rotate-90' : 'rotate-0'" class="transition duration-300 ease-in-out"/>
+      <div class="transition ml-1 duration-300 ease-in-out overflow-hidden" :class="accordions ? 'h-0 ' : 'h-auto'" >
+        <LayoutsNavigationsVerticalList :children="item.children" :hovering="props.hovering" />
       </div>
-    </ULink>
-    <div class="transition duration-300 ease-in-out overflow-hidden" :class="accordions ? 'h-0 ' : 'h-auto'" >
-      <LayoutsNavigationsVerticalList :children="item.children" :hovering="props.hovering" />
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '~/store/useAuthStore'
+import { storeToRefs } from 'pinia';
+
+const { permissions } = storeToRefs(useAuthStore())
+
 
 const props = defineProps({
   children: {
     type: Object,
-    required: true
+    required: false
   },
   hovering:{
     type: Boolean,

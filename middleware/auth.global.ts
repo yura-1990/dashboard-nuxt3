@@ -3,11 +3,12 @@ import { useAuthStore } from "~/store/useAuthStore";
 export default defineNuxtRouteMiddleware(async(to, from) => {
   const decode = useAuthStore()
   const token = useCookie('token');
-  
+
   if (token.value) {
-    let user = await decode.decodeJwtToken(useCookie('token').value)
+    let user = await decode.decodeJwtToken(token.value)
     decode.userData = user.userData
-  }  
+    await decode.checkToken()
+  }
 
   if (to.path === '/' && !!token.value) {
     return navigateTo('/home')

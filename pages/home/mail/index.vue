@@ -1,9 +1,12 @@
 <script setup lang="ts">
-
+definePageMeta({
+  middleware: ['ability']
+})
 </script>
 
 <template>
-  <div>Home</div>
+  <h1>Salom</h1>
+
 </template>
 
 <style scoped>

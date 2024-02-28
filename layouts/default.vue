@@ -1,16 +1,22 @@
 <template>
     <section class="bg-[#f8f7faea] dark:bg-[#2f2b3dc7] flex h-screen">
       <LayoutsNavigationsVertical />
-      <div class="overflow-y-auto px-5 py-2 w-full">
+      <div class="overflow-y-auto px-3 py-2 w-full">
         <layouts-top-horizontal-meny-top-menu />
         <slot />
       </div>
     </section>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/useAuthStore';
-const { authenticated } = storeToRefs(useAuthStore());
+import { onMounted } from "vue";
+
+const toast = useToast()
+const userData = useAuthStore()
+
+onMounted(()=>{
+  toast.add({ title: `Welcome ${userData?.userData?.name}` })
+})
 
 </script>
 <style scoped>
