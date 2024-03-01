@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>Role list</h1>
+  <h1>{{ $t('roles') }}</h1>
 </template>
 
 <style scoped>

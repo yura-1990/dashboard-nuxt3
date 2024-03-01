@@ -1,12 +1,9 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: ['ability']
-})
+
 </script>
 
 <template>
-  <h1>Salom</h1>
-
+<h1>Users</h1>
 </template>
 
 <style scoped>

@@ -8,6 +8,7 @@
   import { storeToRefs } from 'pinia';
   import { useAuthStore } from '~/store/useAuthStore';
   const { authenticated, error, loading, permissions } = storeToRefs(useAuthStore());
+  const { authenticateUser } = useAuthStore()
 
   const state = reactive({
     email: undefined,
@@ -27,6 +28,7 @@
     await authenticateUser(event.data);
 
     if (authenticated) {
+      location.href = '/'
       await router.push('/');
     }
   }

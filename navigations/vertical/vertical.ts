@@ -1,74 +1,22 @@
 export const vertical = () => {
   return [
     {
+      title: 'Home',
+      icon: { name: 'ph:house-light', size: '28' },
+      permissions: ['Browse Home'],
+      to: {name: 'home'},
+    },
+    {
       title: 'Roles',
       icon: { name: 'ph:house-light', size: '28' },
       permissions: ['Browse Roles'],
-      children: [
-        {
-          title: 'Roles-list sdfas dasd fasf asdf asdfsdgdsghsd fgdsf hgsdf hgsdf hgsdf hgsdfg sdfg ',
-          icon: { name: 'cil:circle', size: '14' },
-          permissions: ['Browse Roles'],
-          children: [
-            {
-              title: 'Roles-list',
-              icon: { name: 'cil:circle', size: '14' },
-              to: { name: 'roles', target: "_blank"},
-              permissions: ['Browse Roles'],
-            },
-            {
-              title: 'Child',
-              icon: { name: 'cil:circle', size: '14' },
-              permissions: ['Browse Roles'],
-              children: [
-                {
-                  title: 'Roles-list',
-                  icon: { name: 'cil:circle', size: '14' },
-                  permissions: ['Browse Roles'],
-                  children: [
-                    {
-                      title: 'Roles-list',
-                      icon: { name: 'cil:circle', size: '14' },
-                      to: { name: 'roles', target: "_blank"},
-                      permissions: ['Browse Roles'],
-                    },
-                    {
-                      title: 'Child',
-                      icon: { name: 'cil:circle', size: '14' },
-                      to: {name: 'home-child'},
-                      permissions: ['Browse Roles']
-                    }
-                  ]
-                },
-                {
-                  title: 'Child',
-                  icon: { name: 'cil:circle', size: '14' },
-                  to: {name: 'home-child'},
-                  permissions: ['Browse Roles']
-                }
-              ]
-            }
-          ]
-        },
-        {
-          title: 'Child',
-          icon: { name: 'cil:circle', size: '14' },
-          to: {name: 'home-child'},
-          permissions: ['Browse Roles']
-        }
-      ]
+      to: { name: 'roles' },
     },
     {
-      title: 'About',
+      title: 'Users',
       icon: { name: 'ph:house-light', size: '28' },
-      to: { name: 'about' },
-      permissions: ['Browse Roles']
+      permissions: ['Browse Users'],
+      to: { name: 'users' },
     },
-    {
-      title: 'Theme',
-      icon: { name: 'ph:house-light', size: '28' },
-      to: { name: 'theme' },
-      permissions: ['Browse theme']
-    }
   ]
 }

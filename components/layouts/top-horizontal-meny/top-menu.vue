@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import UserData from "~/components/layouts/top-horizontal-meny/user-data.vue";
+import LangSwitcher from "~/components/language/LangSwitcher.vue";
+
 </script>
 
 <template>
@@ -9,6 +11,7 @@ import UserData from "~/components/layouts/top-horizontal-meny/user-data.vue";
 
     </div>
     <div class="flex gap-4">
+      <LangSwitcher />
       <LazyThemesColorMode />
       <UserData />
     </div>
