@@ -41,7 +41,7 @@ export default defineNuxtConfig({
       {
         code: 'uzk',
         iso: 'uzk-UZ',
-        name: 'Uzbek',
+        name: 'Uzbek-cyril',
         file: 'uzk-UZB.json'
       },
     ],
