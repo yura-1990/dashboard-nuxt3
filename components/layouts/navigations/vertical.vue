@@ -1,6 +1,6 @@
 <template>
   <div @mouseenter="onHovering(true)" @mouseleave="onHovering(false)"
-    class="h-screen bg-slate-50 shadow-xl relative overflow-y-auto overflow-x-hidden duration-100 hover:ease-in dark:bg-[#2F3349FF] z-50"
+    class="h-screen bg-slate-50 shadow-xl relative overflow-y-auto overflow-x-hidden duration-100 hover:ease-in dark:bg-[#2F3349FF]"
     :class="openClose ? 'w-[5rem] hover:w-[18.625rem]' : 'w-[18.625rem]'"
   >
     <div class=" w-[15.625rem] absolute top-0 left-0 ">

@@ -1,4 +1,17 @@
 {
   "title": "Heading",
-  "roles": "Roles"
+  "create-new-user": "Create a new user",
+  "name":  "Your Name",
+  "email": "Your Email",
+  "password": "Your Password",
+  "repeat-password": "Repeat Password",
+  "choose-role": "Choose roles",
+  "submit": "Sign in",
+  "register-new-user": "Register new user",
+  "home": "Home",
+  "roles" : "Roles",
+  "users": "Users",
+  "user-name": "User Name",
+  "email-address": "Email Address",
+  "user-roles": "User Roles"
 }

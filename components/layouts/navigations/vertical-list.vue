@@ -13,7 +13,7 @@
             </div>
             <span class="word-shadow text-left overflow-hidden text-ellipsis"
                   :class="props.hovering ? 'opacity-100' : 'opacity-0'"
-            >{{ item.title }}</span>
+            >{{ $t(item.title) }}</span>
           </div>
           <div
               v-if="item.children"

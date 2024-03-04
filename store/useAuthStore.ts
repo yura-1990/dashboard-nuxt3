@@ -19,6 +19,7 @@ export const useAuthStore = defineStore("auth", {
 
   actions: {
     authenticateUser: async function ({email, password}: UserPayloadInterface) {
+
       this.loading = true
       const {data, pending, error}: any = await useFetch(
           "http://localhost:8000/api/auth/login",
@@ -28,7 +29,6 @@ export const useAuthStore = defineStore("auth", {
             body: {email, password},
           }
       );
-
 
       if (data.value) {
 

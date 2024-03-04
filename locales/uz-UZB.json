@@ -1,4 +1,17 @@
 {
   "title": "Bosh sahib",
-  "roles": "Rollar"
+  "create-new-user": "Yangi foydalanuvchini yaratish",
+  "name":  "Ism",
+  "email": "Elektron manzil",
+  "password": "Parol",
+  "repeat-password": "Parolni takrorlang",
+  "choose-role": "Rollarni tanlang",
+  "submit": "Ro`yxattan o`tish",
+  "register-new-user": "Yangi foydalanuvchini ro`yxatdan o`tkazmoq",
+  "home": "Bosh sahifa",
+  "roles" : "Rollar",
+  "users": "Foydananuvchilar",
+  "user-name": "Ism",
+  "email-address": "Email Pochta",
+  "user-roles": "Rollar"
 }

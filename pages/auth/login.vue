@@ -7,7 +7,7 @@
   import type { FormSubmitEvent } from '#ui/types'
   import { storeToRefs } from 'pinia';
   import { useAuthStore } from '~/store/useAuthStore';
-  const { authenticated, error, loading, permissions } = storeToRefs(useAuthStore());
+  const { authenticated, error } = storeToRefs(useAuthStore());
   const { authenticateUser } = useAuthStore()
 
   const state = reactive({

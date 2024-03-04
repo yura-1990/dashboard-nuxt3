@@ -10,12 +10,14 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/useAuthStore';
 import { onMounted } from "vue";
+import { initFlowbite } from 'flowbite'
 
 const toast = useToast()
 const userData = useAuthStore()
 
 onMounted(()=>{
   toast.add({ title: `Welcome ${userData?.userData?.name}` })
+  initFlowbite()
 })
 
 </script>
