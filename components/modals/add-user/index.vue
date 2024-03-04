@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { initModals } from 'flowbite'
 import { onMounted } from "vue";
 import type {UserCreateInterface} from "~/store/useUserListStore";
 import { storeToRefs } from "pinia";
 import { useRolesStore } from "~/store/useRolesStore";
 import { useUserListStore } from "~/store/useUserListStore";
-
 
 const { roleLists } = storeToRefs(useRolesStore())
 const { getRoleList } = useRolesStore()
@@ -15,9 +13,10 @@ const { createUser } = useUserListStore()
 const toggleModal = ref(false)
 
 onMounted(()=>{
-  initModals()
   getRoleList()
 })
+
+
 
 function handleShowModal(e: any){
   toggleModal.value = !toggleModal.value
@@ -51,13 +50,13 @@ const form = ref<UserCreateInterface>({
   password_confirmation: '',
   roles: []
 })
-async function submit(){
-  console.log(form.value)
 
+async function submit(){
   await createUser(form.value)
 
   toggleModal.value = false
   document.body.classList.remove('overflow-hidden')
+  
 }
 
 </script>
