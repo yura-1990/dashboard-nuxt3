@@ -13,5 +13,7 @@
   "users": "Фойдаланувчилар",
   "user-name": "Исм",
   "email-address": "Email Почта",
-  "user-roles": "Роллар"
+  "user-roles": "Роллар",
+  "previous": "Оркага",
+  "next": "Кейинги"
 }

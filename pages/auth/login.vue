@@ -28,8 +28,10 @@
     await authenticateUser(event.data);
 
     if (authenticated) {
-      location.href = '/'
-      await router.push('/');
+      if (!error.value){
+        location.href = '/'
+        await router.push('/');
+      }
     }
   }
 

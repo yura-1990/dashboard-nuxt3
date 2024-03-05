@@ -13,5 +13,7 @@
   "users": "Users",
   "user-name": "User Name",
   "email-address": "Email Address",
-  "user-roles": "User Roles"
+  "user-roles": "User Roles",
+  "previous": "Previous",
+  "next": "Next"
 }

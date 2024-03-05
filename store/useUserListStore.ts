@@ -13,6 +13,7 @@ export const useUserListStore = defineStore("userList", {
     state: () => {
         return {
             userLists: {},
+            error: null
         };
     },
 
@@ -51,7 +52,12 @@ export const useUserListStore = defineStore("userList", {
             );
 
             if (data.value){
-                this.userLists = await data.value
+                if (data.value.errors) {
+                    this.error = await data.value.errors
+                } else {
+                    this.error = null
+                    this.userLists = await data.value
+                }
             }
 
         }

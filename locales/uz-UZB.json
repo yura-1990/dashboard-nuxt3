@@ -13,5 +13,8 @@
   "users": "Foydananuvchilar",
   "user-name": "Ism",
   "email-address": "Email Pochta",
-  "user-roles": "Rollar"
+  "user-roles": "Rollar",
+  "previous": "Orqaga",
+  "next": "Keyingi"
+
 }

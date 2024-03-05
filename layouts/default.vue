@@ -15,7 +15,11 @@ const toast = useToast()
 const userData = useAuthStore()
 
 onMounted(()=>{
-  toast.add({ title: `Welcome ${userData?.userData?.name}` })
+  return toast.add({title: `Welcome ${userData?.userData?.name}`, ui: {
+      notifications: {
+        position: 'top-0'
+      }
+    }});
 })
 
 </script>
