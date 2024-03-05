@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   $development: undefined, $env: undefined, $meta: undefined, $production: undefined, $test: undefined,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@pinia/nuxt',
     'nuxt-permissions',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    'nuxt-swiper',
   ],
 
   i18n:{

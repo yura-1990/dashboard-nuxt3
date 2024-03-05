@@ -15,5 +15,6 @@
   "email-address": "Email Address",
   "user-roles": "User Roles",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "permissions": "Permissions"
 }

@@ -11,15 +11,17 @@
 import { useAuthStore } from '~/store/useAuthStore';
 import { onMounted } from "vue";
 
+
 const toast = useToast()
 const userData = useAuthStore()
 
 onMounted(()=>{
-  return toast.add({title: `Welcome ${userData?.userData?.name}`, ui: {
+  toast.add({title: `Welcome ${userData?.userData?.name}`, ui: {
       notifications: {
         position: 'top-0'
       }
     }});
+    
 })
 
 </script>
