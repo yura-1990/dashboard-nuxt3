@@ -8,16 +8,25 @@ import { useUserListStore, type UserCreateInterface } from '~/store/useUserListS
 import { onMounted } from "vue"
 import { useRolesStore } from "~/store/useRolesStore"
 import { useAuthStore } from '~/store/useAuthStore';
-import { initFlowbite, initTooltips } from 'flowbite'
+import { initFlowbite } from 'flowbite'
+import { useRouter } from 'vue-router'
 
-const { locale, locales } = useI18n()
+const router = useRouter()
+const { locale } = useI18n()
 const { userLists, error } = storeToRefs(useUserListStore());
 const { permissions } = storeToRefs(useAuthStore());
-const { getUserList, createUser, updateUsers, deleteUsers, getTrashedUsers, restoreUsers, restoreAllUsers } = useUserListStore()
+const { getUserList, createUser, updateUsers, deleteUsers, getTrashedUsers, restoreUsers, restoreAllUsers, getOneUser } = useUserListStore()
 const { roleLists } = storeToRefs(useRolesStore())
 const { getRoleList } = useRolesStore()
 const toggleModal = ref(false)
 const toggleTrash = ref(false)
+const links = ref([
+  {
+    title: 'users',
+    icon: { name: 'nimbus:user-group', size: '16' },
+    to: '/users',
+  }
+])
 const togglePassword = ref({
   password: false,
   password_confirm: false
@@ -92,8 +101,9 @@ async function submit(e: any) {
   }
 }
 
-function showUser(user: any) {
-
+async function showUser(id: number) {
+  await getOneUser(id)
+  await router.push('/users/show')
 }
 
 function updateUser(user: any) {
@@ -118,12 +128,13 @@ async function deleteUser(user: { id: number }) {
 
 async function handleTrashedUsers() {
   toggleTrash.value = !toggleTrash.value
+
   if (toggleTrash.value) {
     await getTrashedUsers()
-    if (!(userLists.value.data.length > 0)) {
+    if (! (userLists.value.data.length > 0)) {
       toast.add({ title: 'No users in trash' })
-      toggleTrash.value = false
       await getUserList(page.value)
+      toggleTrash.value = false
     }
   } else {
     await getUserList(page.value)
@@ -135,7 +146,7 @@ async function handleTrashedUsers() {
 async function restoreUser(id: number) {
   if (userLists.value.data.length > 1) {
     await restoreUsers(id)
-    await getTrashedUsers()
+    await getTrashedUsers(page.value)
   } else {
     await restoreUsers(id)
     await getUserList(page.value)
@@ -151,11 +162,32 @@ async function restoreAll() {
   toggleTrash.value = false
 }
 
+async function changePage(p: number){
+  if (toggleTrash.value){
+    await getTrashedUsers(p)
+  } else {
+    page.value = p
+    await getUserList(page.value)
+  }
+}
+
+async function prevNextPage(url: any){
+  const urlParams = new URLSearchParams(new URL(url).search);
+  const pageNumber: any = urlParams.get('page');
+
+  if (!toggleTrash.value){
+    page.value = parseInt(pageNumber)
+    await getUserList(page.value)
+  } else {
+    await getTrashedUsers(parseInt(pageNumber))
+  }
+
+}
+
 </script>
 
 <template>
-  <div
-    class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-1 dark:bg-[#2F3349FF] mt-2">
+  <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-1 dark:bg-[#2F3349FF] mt-2">
     <!-- Card header -->
     <div class="items-center justify-between lg:flex">
     </div>
@@ -165,7 +197,9 @@ async function restoreAll() {
         <div class="inline-block min-w-full align-middle">
           <div class="overflow-hidden shadow sm:rounded-lg">
             <div class="p-1 flex items-center justify-between">
-              <div></div>
+              <div>
+                <Breadcrumb :links="links" />
+              </div>
               <!-- Modal toggle -->
               <div class="flex gap-2 items-center">
                 <div v-if="toggleTrash">
@@ -217,7 +251,6 @@ async function restoreAll() {
                     <div class="tooltip-arrow" data-popper-arrow></div>
                   </div>
                 </div>
-
               </div>
 
               <!-- Main modal -->
@@ -233,7 +266,7 @@ async function restoreAll() {
                       </h3>
                       <button @click="handleHideModal" type="button" id="close-button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-toggle="crud-modal">
+                        >
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                           viewBox="0 0 14 14">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -262,24 +295,21 @@ async function restoreAll() {
                     <!-- Modal body -->
                     <form @submit.prevent="submit" class="max-w-sm py-4 mx-auto">
                       <div class="mb-5">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                  $t('name') }} *</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('name') }} *</label>
                         <input type="text" v-model="form.name" id="name"
                           class="shadow-sm bg-gray-50  text-gray-900 text-sm border border-gray-300 focus:ring-blue-500 dark:focus:border-blue-500 rounded-lg  focus:border-blue-500 block w-full p-2.5 dark:bg-[#2F3349FF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500  dark:shadow-sm-light"
                           placeholder="name@flowbite.com" />
                       </div>
 
                       <div class="mb-5">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                  $t('email') }}</label>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('email') }}</label>
                         <input type="email" v-model="form.email" id="email"
                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#2F3349FF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                           placeholder="name@flowbite.com" />
                       </div>
 
                       <div class="mb-5 relative">
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                  $t('password') }}</label>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('password') }}</label>
                         <input :type="!togglePassword.password ? 'password' : 'text'" v-model="form.password"
                           id="password"
                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#2F3349FF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
@@ -299,8 +329,7 @@ async function restoreAll() {
 
                       <div class="mb-5 relative">
                         <label for="repeat-password"
-                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('repeat-password')
-                          }}</label>
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('repeat-password') }}</label>
                         <input :type="!togglePassword.password_confirm ? 'password' : 'text'"
                           v-model="form.password_confirmation" id="repeat-password"
                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#2F3349FF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
@@ -337,9 +366,9 @@ async function restoreAll() {
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                             required />
                         </div>
-                        <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree
-                          with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and
-                            conditions</a></label>
+                        <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                          I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
+                        </label>
                       </div>
                       <button type="submit"
                         class="text-white active-link focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
@@ -410,7 +439,7 @@ async function restoreAll() {
                       </template>
 
                       <template v-else>
-                        <button @click="showUser(item)" v-if="permissions?.find((el) => el === 'Read Users')">
+                        <button @click="showUser(item.id)" v-if="permissions?.find((el) => el === 'Show Users')">
                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 15 15">
                             <path fill="currentColor"
                               d="m.5 7.5l-.464-.186a.5.5 0 0 0 0 .372zm14 0l.464.186a.5.5 0 0 0 0-.372zm-7 4.5c-2.314 0-3.939-1.152-5.003-2.334a9.368 9.368 0 0 1-1.449-2.164a5.065 5.065 0 0 1-.08-.18l-.004-.007v-.001L.5 7.5l-.464.186v.002l.003.004a2.107 2.107 0 0 0 .026.063l.078.173a10.368 10.368 0 0 0 1.61 2.406C2.94 11.653 4.814 13 7.5 13zm-7-4.5l.464.186l.004-.008a2.62 2.62 0 0 1 .08-.18a9.368 9.368 0 0 1 1.449-2.164C3.56 4.152 5.186 3 7.5 3V2C4.814 2 2.939 3.348 1.753 4.666a10.367 10.367 0 0 0-1.61 2.406a6.05 6.05 0 0 0-.104.236l-.002.004v.001H.035zm7-4.5c2.314 0 3.939 1.152 5.003 2.334a9.37 9.37 0 0 1 1.449 2.164a4.705 4.705 0 0 1 .08.18l.004.007v.001L14.5 7.5l.464-.186v-.002l-.003-.004a.656.656 0 0 0-.026-.063a9.094 9.094 0 0 0-.39-.773a10.365 10.365 0 0 0-1.298-1.806C12.06 3.348 10.186 2 7.5 2zm7 4.5a68.887 68.887 0 0 1-.464-.186l-.003.008l-.015.035l-.066.145a9.37 9.37 0 0 1-1.449 2.164C11.44 10.848 9.814 12 7.5 12v1c2.686 0 4.561-1.348 5.747-2.665a10.366 10.366 0 0 0 1.61-2.407a6.164 6.164 0 0 0 .104-.236l.002-.004v-.001h.001zM7.5 9A1.5 1.5 0 0 1 6 7.5H5A2.5 2.5 0 0 0 7.5 10zM9 7.5A1.5 1.5 0 0 1 7.5 9v1A2.5 2.5 0 0 0 10 7.5zM7.5 6A1.5 1.5 0 0 1 9 7.5h1A2.5 2.5 0 0 0 7.5 5zm0-1A2.5 2.5 0 0 0 5 7.5h1A1.5 1.5 0 0 1 7.5 6z" />
@@ -435,8 +464,6 @@ async function restoreAll() {
                           </svg>
                         </button>
                       </template>
-
-
                     </div>
                   </td>
                 </tr>

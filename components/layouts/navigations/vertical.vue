@@ -1,9 +1,9 @@
 <template>
   <div @mouseenter="onHovering(true)" @mouseleave="onHovering(false)"
-    class="h-screen bg-slate-50 shadow-xl relative overflow-y-auto overflow-x-hidden duration-100 hover:ease-in dark:bg-[#2F3349FF]"
-    :class="openClose ? 'w-[5rem] hover:w-[18.625rem]' : 'w-[18.625rem]'"
+    class="h-full bg-slate-50 shadow-xl sticky overflow-y-auto overflow-x-hidden duration-100 hover:ease-in dark:bg-[#2F3349FF]"
+    :class="openClose ? 'w-[5rem] hover:w-[15.625rem]' : 'w-[15.625rem]'"
   >
-    <div class=" w-[15.625rem] absolute top-0 left-0 ">
+    <div class=" w-[15.625rem] ">
       <ul class="h-[3.75rem] flex items-center px-5 justify-between ">
         <li class="w-[2.125rem]">
           <NuxtImg class="w-[2.125rem] " src="assets/logo.svg"/>

@@ -1,6 +1,4 @@
 import {defineStore} from "pinia";
-
-
 export interface UserCreateInterface {
     name: string;
     email: string;
@@ -15,6 +13,7 @@ export const useUserListStore = defineStore("userList", {
         return {
             userLists: {},
             error: null,
+            oneUser: {}
         };
     },
 
@@ -36,6 +35,35 @@ export const useUserListStore = defineStore("userList", {
             );
 
             this.userLists = await data.value
+        },
+
+        getOneUser: async function(id: number){
+            const token = useCookie("token")
+            const userId = useCookie('userId')
+            const {data, pending, error}: any = await useFetch(
+                `http://localhost:8000/api/users/show/${id}`,
+                {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token.value}`
+                    }
+                }
+            );
+
+            console.log(data)
+
+            if (data.value){
+                // @ts-ignore
+                userId.value = id
+                if (data.value.errors) {
+                    this.error = await data.value.errors
+                } else {
+                    this.error = null
+                    this.oneUser = await data.value
+                }
+            }
+
         },
 
         createUser: async function({name, email, password, password_confirmation, roles}: UserCreateInterface){
@@ -112,7 +140,7 @@ export const useUserListStore = defineStore("userList", {
 
         },
 
-        getTrashedUsers: async function(){
+        getTrashedUsers: async function(page:number = 1){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
                 "http://localhost:8000/api/users/trashed",
@@ -121,18 +149,14 @@ export const useUserListStore = defineStore("userList", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token.value}`
+                    },
+                    params: {
+                        page: page
                     }
                 }
             );
 
-            if (data.value){
-                if (data.value.errors) {
-                    this.error = await data.value.errors
-                } else {
-                    this.error = null
-                    this.userLists = await data.value
-                }
-            }
+            this.userLists = await data.value
 
         },
 
@@ -181,7 +205,6 @@ export const useUserListStore = defineStore("userList", {
             }
 
         }
-
 
     },
 });
