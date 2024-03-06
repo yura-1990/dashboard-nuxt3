@@ -6,10 +6,15 @@
     <div class=" w-[15.625rem] ">
       <ul class="h-[3.75rem] flex items-center px-5 justify-between ">
         <li class="w-[2.125rem]">
-          <NuxtImg class="w-[2.125rem] " src="assets/logo.svg"/>
+          <NuxtImg 
+            class="w-[2.125rem] " 
+            src="assets/logo.svg"
+            loading="lazy"
+            decoding="auto"
+          />
         </li>
         <li><div class="text-3xl">Vuexy</div></li>
-        <li><NuxtImg class="w-5 h-5" @click="handleOpenCloseNavbar" :src="openClose ? 'assets/close.svg' : 'assets/open.svg'"/></li>
+        <li><NuxtImg class="w-5 h-5"  @click="handleOpenCloseNavbar" :src="openClose ? 'assets/close.svg' : 'assets/open.svg'" loading="lazy" decoding="auto" /></li>
       </ul>
       <div class="px-2">
         <LayoutsNavigationsVerticalList :children="verticalNavigation" :hovering="hovering" />

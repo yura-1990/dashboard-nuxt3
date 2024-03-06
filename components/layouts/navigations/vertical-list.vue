@@ -2,7 +2,7 @@
     <div v-for="(item, index) in props?.children" :key="index">
       <div>
         <ULink
-            :to="item?.to"
+            :to="item.to"
             class="flex items-center mb-1  py-2 pl-4 pr-3 w-full rounded "
             active-class="active-link text-white dark:text-white"
             inactive-class="text-black-700 dark:text-white-400 hover:bg-[#8692d00f] hover:text-white-700 dark:hover:text-black-900"
@@ -30,11 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '~/store/useAuthStore'
-import { storeToRefs } from 'pinia';
-
-const { permissions } = storeToRefs(useAuthStore())
-
 
 const props = defineProps({
   children: {

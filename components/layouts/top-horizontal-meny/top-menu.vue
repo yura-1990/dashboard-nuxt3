@@ -6,7 +6,7 @@ import LangSwitcher from "~/components/language/LangSwitcher.vue";
 </script>
 
 <template>
-  <div class="flex items-center justify-between relative rounded h-[60px] px-4 sticky top-0 bg-white shadow-lg dark:bg-[#2F3349FF]">
+  <div class="flex items-center justify-between rounded h-[60px] px-4 z-50 sticky top-0 bg-white shadow-lg dark:bg-[#2F3349FF]">
     <div class="">
 
     </div>
