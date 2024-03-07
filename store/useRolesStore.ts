@@ -12,7 +12,7 @@ export const useRolesStore = defineStore("roles", {
         getRoleList: async function () {
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                "http://localhost:8000/api/roles/get-all",
+                "https://feo.wellsoft.uz/api/roles/get-all",
                 {
                     method: "get",
                     headers: {
