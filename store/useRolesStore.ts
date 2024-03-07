@@ -1,8 +1,10 @@
 import {defineStore} from "pinia";
+import type {UserCreateInterface} from "~/store/useUserListStore";
 export const useRolesStore = defineStore("roles", {
     state: () => {
         return {
             roleLists: {},
+            error: null,
         };
     },
 
@@ -21,7 +23,33 @@ export const useRolesStore = defineStore("roles", {
             );
 
             this.roleLists = await data.value
-            console.log(await data.value)
+        },
+
+        createRole: async function( descriptions: any, permissions: any ){
+            const token = useCookie("token")
+            const {data, pending, error}: any = await useFetch(
+                "http://localhost:8000/api/roles/create",
+                {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token.value}`
+                    },
+                    body: {
+                        descriptions,
+                        permissions
+                    },
+                }
+            );
+
+            if (data.value){
+                if (data.value.errors) {
+                    this.error = await data.value.errors
+                } else {
+                    this.error = null
+                }
+            }
+
         },
 
     },

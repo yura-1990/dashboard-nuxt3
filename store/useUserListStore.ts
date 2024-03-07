@@ -51,8 +51,6 @@ export const useUserListStore = defineStore("userList", {
                 }
             );
 
-            console.log(data)
-
             if (data.value){
                 // @ts-ignore
                 userId.value = id

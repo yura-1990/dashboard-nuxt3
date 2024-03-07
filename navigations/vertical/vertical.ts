@@ -24,5 +24,11 @@ export const vertical = () => {
       permissions: ['Browse Permissions'],
       to: '/permissions',
     },
+    {
+      title: 'states',
+      icon: { name: 'mingcute:book-5-line', size: '28' },
+      permissions: ['Browse States'],
+      to: '/states',
+    },
   ]
 }

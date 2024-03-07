@@ -187,7 +187,7 @@ async function prevNextPage(url: any){
 </script>
 
 <template>
-  <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-1 dark:bg-[#2F3349FF] mt-2">
+  <div class="bg-white border border-gray-500 rounded-lg shadow-sm dark:border-gray-500 sm:p-1 dark:bg-[#2F3349FF] mt-2">
     <!-- Card header -->
     <div class="items-center justify-between lg:flex">
     </div>

@@ -34,13 +34,13 @@ const links = ref([
 </script>
 
 <template>
-  <div class="bg-white border-gray-200 overflow-y-auto rounded-lg shadow-sm sm:p-1 dark:bg-transparent mt-2">
+  <div class="overflow-y-auto rounded-lg sm:p-1 dark:bg-transparent mt-2">
     <div class="w-max">
       <Breadcrumb :links="links" />
     </div>
     <div class="grid grid-cols-1 mt-3 xl:grid-cols-3 xl:gap-4 dark:bg-transparent">
       <div class="col-span-full xl:col-auto">
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
+        <div class="p-4 mb-4 bg-white border border-gray-500 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-500 sm:p-6 dark:bg-[#2F3349FF]">
           <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
             <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="https://flowbite-admin-dashboard.vercel.app/images/users/bonnie-green-2x.png" alt="Jese picture">
             <div>
@@ -60,7 +60,7 @@ const links = ref([
             </div>
           </div>
         </div>
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
+        <div class="p-4 mb-4 bg-white border border-gray-500 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-500 sm:p-6 dark:bg-[#2F3349FF]">
           <h3 class="mb-4 text-xl font-semibold dark:text-white">Language &amp; Time</h3>
           <div class="mb-4">
             <label for="settings-language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select language</label>
@@ -92,7 +92,7 @@ const links = ref([
         </div>
       </div>
       <div class="col-span-2">
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
+        <div class="p-4 mb-4 bg-white border border-gray-500 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-500 sm:p-6 dark:bg-[#2F3349FF]">
           <div class="flow-root">
             <h3 class="text-xl font-semibold dark:text-white">Social accounts</h3>
             <ul class="divide-y divide-gray-200 dark:divide-gray-700">

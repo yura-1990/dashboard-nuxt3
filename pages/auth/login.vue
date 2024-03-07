@@ -1,42 +1,3 @@
-<script setup lang="ts">
-  definePageMeta({
-    layout: 'auth-layout'
-  })
-
-  import { object, string, type InferType } from 'yup'
-  import type { FormSubmitEvent } from '#ui/types'
-  import { storeToRefs } from 'pinia';
-  import { useAuthStore } from '~/store/useAuthStore';
-  const { authenticated, error } = storeToRefs(useAuthStore());
-  const { authenticateUser } = useAuthStore()
-
-  const state = reactive({
-    email: undefined,
-    password: undefined
-  })
-
-  const router = useRouter();
-
-  const schema = object({
-    email: string().email('Invalid email').required('Required'),
-    password: string().min(6, 'Must be at least 8 characters').required('Required')
-  })
-
-  type Schema = InferType<typeof schema>
-
-  async function onSubmit (event: FormSubmitEvent<Schema>) {
-    await authenticateUser(event.data);
-
-    if (authenticated) {
-      if (!error.value){
-        location.href = '/'
-        await router.push('/');
-      }
-    }
-  }
-
-</script>
-
 <template>
   <div class="flex items-center justify-center w-full min-h-screen bg-gray-100 dark:bg-[#2f2b3dc7]">
     <div class="w-full max-w-md p-8 space-y-3 rounded-xl bg-white shadow-md dark:bg-[#2F3349FF] border">
@@ -86,6 +47,45 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: 'auth-layout'
+})
+
+import { object, string, type InferType } from 'yup'
+import type { FormSubmitEvent } from '#ui/types'
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '~/store/useAuthStore';
+const { authenticated, error } = storeToRefs(useAuthStore());
+const { authenticateUser } = useAuthStore()
+
+const state = reactive({
+  email: undefined,
+  password: undefined
+})
+
+const router = useRouter();
+
+const schema = object({
+  email: string().email('Invalid email').required('Required'),
+  password: string().min(6, 'Must be at least 8 characters').required('Required')
+})
+
+type Schema = InferType<typeof schema>
+
+async function onSubmit (event: FormSubmitEvent<Schema>) {
+  await authenticateUser(event.data);
+
+  if (authenticated) {
+    if (!error.value){
+      location.href = '/'
+      await router.push('/');
+    }
+  }
+}
+
+</script>
 
 <style scoped>
 
