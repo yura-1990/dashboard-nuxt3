@@ -22,7 +22,7 @@ export const useAuthStore = defineStore("auth", {
 
       this.loading = true
       const {data, pending, error}: any = await useFetch(
-          "https://feo.wellsoft.uz/api/auth/login",
+          "http://localhost:8000/api/auth/login",
           {
             method: "post",
             headers: {"Content-Type": "application/json"},
@@ -61,7 +61,7 @@ export const useAuthStore = defineStore("auth", {
       userRoles.value = this.roles = await decodeToken?.userRoles
 
       const {data, error}: any = await useFetch(
-          "https://feo.wellsoft.uz/api/users/me",
+          "http://localhost:8000/api/users/me",
           {
             method: "get",
             headers: {

@@ -21,7 +21,7 @@ export const useUserListStore = defineStore("userList", {
         getUserList: async function (page: number = 1) {
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                "https://feo.wellsoft.uz/api/users/list",
+                "http://localhost:8000/api/users/list",
                 {
                     method: "get",
                     headers: {
@@ -41,7 +41,7 @@ export const useUserListStore = defineStore("userList", {
             const token = useCookie("token")
             const userId = useCookie('userId')
             const {data, pending, error}: any = await useFetch(
-                `https://feo.wellsoft.uz/api/users/show/${id}`,
+                `http://localhost:8000/api/users/show/${id}`,
                 {
                     method: "get",
                     headers: {
@@ -67,7 +67,7 @@ export const useUserListStore = defineStore("userList", {
         createUser: async function({name, email, password, password_confirmation, roles}: UserCreateInterface){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                "https://feo.wellsoft.uz/api/users/create",
+                "http://localhost:8000/api/users/create",
                 {
                     method: "post",
                     headers: {
@@ -92,7 +92,7 @@ export const useUserListStore = defineStore("userList", {
         updateUsers: async function({name, email, password, password_confirmation, roles, id}: UserCreateInterface){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                `https://feo.wellsoft.uz/api/users/update/${id}`,
+                `http://localhost:8000/api/users/update/${id}`,
                 {
                     method: "put",
                     headers: {
@@ -117,7 +117,7 @@ export const useUserListStore = defineStore("userList", {
         deleteUsers: async function(id:number){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                `https://feo.wellsoft.uz/api/users/soft-delete/${id}`,
+                `http://localhost:8000/api/users/soft-delete/${id}`,
                 {
                     method: "delete",
                     headers: {
@@ -141,7 +141,7 @@ export const useUserListStore = defineStore("userList", {
         getTrashedUsers: async function(page:number = 1){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                "https://feo.wellsoft.uz/api/users/trashed",
+                "http://localhost:8000/api/users/trashed",
                 {
                     method: "get",
                     headers: {
@@ -161,7 +161,7 @@ export const useUserListStore = defineStore("userList", {
         restoreUsers: async function(id:number){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                `https://feo.wellsoft.uz/api/users/restore/${id}`,
+                `http://localhost:8000/api/users/restore/${id}`,
                 {
                     method: "get",
                     headers: {
@@ -184,7 +184,7 @@ export const useUserListStore = defineStore("userList", {
         restoreAllUsers: async function(){
             const token = useCookie("token")
             const {data, pending, error}: any = await useFetch(
-                "https://feo.wellsoft.uz/api/users/restore-all",
+                "http://localhost:8000/api/users/restore-all",
                 {
                     method: "get",
                     headers: {

@@ -54,9 +54,9 @@ const links = ref([
 
 <template>
   <div>
-    <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
-      <div class=" 2xl:col-span-2">
-        <div class="my-3 flex justify-between items-center">
+    <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3 relative">
+      <div class=" 2xl:col-span-2 relative">
+        <div class="my-3 flex sticky top-[-5px] z-50 justify-between items-center">
           <Breadcrumb :links="links" />
 
           <div class="flex items-center gap-3">
@@ -93,7 +93,7 @@ const links = ref([
           </div>
 
         </div>
-        <div class="dark:bg-[#2F3349FF] bg-white border border-gray-500 rounded-lg shadow-sm dark:border-gray-500 overflow-hidden p-1">
+        <div class="dark:bg-[#2F3349FF] sticky top-[65px] bg-white border border-gray-500 rounded-lg shadow-sm dark:border-gray-500 overflow-hidden p-1">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="bg-gray-50 dark:bg-[#2f2b3d49] text-xs text-gray-700  uppercase dark:text-gray-400">
             <tr>
@@ -137,7 +137,13 @@ const links = ref([
                   class="p-2 text-lg font-normal border border-gray-700 text-gray-500 whitespace-nowrap dark:text-gray-400">
                 <select id="small" multiple
                         class="block w-full h-[200px] p-2 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-10 focus:ring-blue-500 focus:border-blue-500  dark:bg-[#2F2B3DFF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option v-for="(it, i) in permissionLists" :key="i" :value="it.id" :selected="item.permissions.find(el => el.name === it.name)">{{ it.descriptions[locale] }}</option>
+                  <option v-for="(it, i) in permissionLists" 
+                          :key="i" 
+                          :value="it.id" 
+                          :selected="item.permissions.find(el => el.name === it.name)"
+                  >
+                  {{ it.descriptions[locale]  }}
+                  </option>
                 </select>
               </td>
               <td
@@ -174,7 +180,7 @@ const links = ref([
           </table>
         </div>
       </div>
-      <div class="p-4 bg-white border border-gray-200 mt-4 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
+      <div class="p-4 bg-white border border-gray-200 mt-4 rounded-lg min-h-80 shadow-sm dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
         <form>
           <div class="mb-6">
             <div v-for="(item, index) in locales" :key="index" class="flex items-center gap-2" >
