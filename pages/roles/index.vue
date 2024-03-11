@@ -137,9 +137,9 @@ const links = ref([
                   class="p-2 text-lg font-normal border border-gray-700 text-gray-500 whitespace-nowrap dark:text-gray-400">
                 <select id="small" multiple
                         class="block w-full h-[200px] p-2 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-10 focus:ring-blue-500 focus:border-blue-500  dark:bg-[#2F2B3DFF] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option v-for="(it, i) in permissionLists" 
-                          :key="i" 
-                          :value="it.id" 
+                  <option v-for="(it, i) in permissionLists"
+                          :key="i"
+                          :value="it.id"
                           :selected="item.permissions.find(el => el.name === it.name)"
                   >
                   {{ it.descriptions[locale]  }}
@@ -180,8 +180,8 @@ const links = ref([
           </table>
         </div>
       </div>
-      <div class="p-4 bg-white border border-gray-200 mt-4 rounded-lg min-h-80 shadow-sm dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
-        <form>
+      <div class="relative">
+        <form class="p-4 bg-white sticky top-[65px] border border-gray-200 mt-4 rounded-lg h-auto shadow-sm dark:border-gray-700 sm:p-6 dark:bg-[#2F3349FF]">
           <div class="mb-6">
             <div v-for="(item, index) in locales" :key="index" class="flex items-center gap-2" >
               <label class="w-10 capitalize" :for="item.iso">{{ item.code }}</label>
