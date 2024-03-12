@@ -11,7 +11,7 @@
             <div class="w-[30px] flex items-center justify-center">
               <Icon :name="item.icon.name" :size="item.icon.size" />
             </div>
-            <span class="word-shadow text-left overflow-hidden text-ellipsis"
+            <span class="word-shadow text-left overflow-hidden capitalize text-ellipsis"
                   :class="props.hovering ? 'opacity-100' : 'opacity-0'"
             >{{ $t(item.title) }}</span>
           </div>
