@@ -30,5 +30,11 @@ export const vertical = () => {
       permissions: ['Browse States'],
       to: '/states',
     },
+    {
+      title: 'salary management',
+      icon: { name: 'eos-icons:cluster-management-outlined', size: '28' },
+      permissions: ['Browse Salary-management'],
+      to: '/salary-management',
+    },
   ]
 }
