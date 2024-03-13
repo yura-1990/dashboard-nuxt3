@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import type {UserCreateInterface} from "~/store/useUserListStore";
+
 export const useRolesStore = defineStore("roles", {
     state: () => {
         return {

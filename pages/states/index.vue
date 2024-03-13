@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useUserListStore} from "~/store/useUserListStore";
-
 definePageMeta({
   middleware: ['ability']
 })
@@ -30,7 +28,7 @@ async function getOneState(id: number){
 const links = ref([
   {
     title: 'states',
-    icon: { name: 'ic:round-lock-person', size: '16' },
+    icon: { name: 'mingcute:book-5-line', size: '16' },
     to: '/states',
   }
 ])
@@ -46,37 +44,36 @@ const links = ref([
       <div class="bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-3 dark:border-gray-700 overflow-hidden py-5 dark:bg-[#2F3349FF]">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg dark:text-gray-400">
           <thead class="bg-gray-50 dark:bg-[#2f2b3d49] text-xs text-gray-700  uppercase dark:text-gray-400">
-          <tr>
-            <th scope="col"
-                class="p-2 border border-gray-700 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              ID
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('Source of funding') }}
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('state number') }}
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('uuid') }}
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('military unit') }}
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('military district') }}
-            </th>
-            <th scope="col"
-                class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-              {{ $t('directive code') }}
-            </th>
+            <tr>
+              <th scope="col" class="p-2 border border-gray-700 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                ID
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('Source of funding') }}
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('state number') }}
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('uuid') }}
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('military unit') }}
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('military district') }}
+              </th>
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('directive code') }}
+              </th>
 
-          </tr>
+            </tr>
           </thead>
           <tbody class="dark:bg-[#2F3349FF] odd:bg-white odd:dark:bg-[#2F3349FF] even:bg-[#2F3349FF] even:dark:bg-[#2F3349FF] border-b dark:border-gray-700">
             <tr v-for="(item, index) in stateLists" :key="index" @click="getOneState(item.id)" class="bg-gray-100 cursor-pointer odd:bg-white odd:dark:bg-[#2F3349FF] even:dark:bg-[#2f2b3d49] even:dark:bg-[#2f2b3d49] border-b dark:border-gray-600">

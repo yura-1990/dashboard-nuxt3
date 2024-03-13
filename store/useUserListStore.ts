@@ -57,6 +57,7 @@ export const useUserListStore = defineStore("userList", {
                 if (data.value.errors) {
                     this.error = await data.value.errors
                 } else {
+
                     this.error = null
                     this.oneUser = await data.value
                 }
