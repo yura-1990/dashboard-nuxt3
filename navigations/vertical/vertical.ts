@@ -28,7 +28,25 @@ export const vertical = () => {
       title: 'states',
       icon: { name: 'mingcute:book-5-line', size: '28' },
       permissions: ['Browse States'],
-      to: '/states',
+      children: [
+        {
+          title: 'states lists',
+          icon: { name: 'mingcute:book-5-line', size: '28' },
+          to: '/states',
+        },
+        {
+          title: '51',
+          icon: { name: 'mingcute:book-5-line', size: '28' },
+          to: '/',
+        },
+        {
+          title: '01',
+          icon: { name: 'mingcute:book-5-line', size: '28' },
+          to: '/',
+        },
+
+      ]
+
     },
     {
       title: 'salary management',

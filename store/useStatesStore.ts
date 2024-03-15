@@ -3,6 +3,7 @@ export const useStatesStore = defineStore("states", {
     state: () => {
         return {
             stateLists: [],
+            directives: [],
             state: {}
         };
     },
@@ -40,6 +41,22 @@ export const useStatesStore = defineStore("states", {
             );
 
             this.state = await data.value
+        },
+
+        getDirectiveLists: async function () {
+            const token = useCookie("token")
+            const {data, pending, error}: any = await useFetch(
+                `http://localhost:8000/api/states/integration/directives`,
+                {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token.value}`
+                    },
+                }
+            );
+
+            this.directives = await data.value
         },
 
     },

@@ -9,13 +9,14 @@ import { useStatesStore } from "~/store/useStatesStore";
 import { storeToRefs } from 'pinia';
 import { useRouter } from "vue-router";
 
-const { stateLists } = storeToRefs(useStatesStore());
-const { getStateList, getStateByID } = useStatesStore()
+const { stateLists, directives } = storeToRefs(useStatesStore());
+const { getStateList, getStateByID, getDirectiveLists } = useStatesStore()
 const router = useRouter()
 
 onMounted(async () => {
   initFlowbite()
   await getStateList()
+  await getDirectiveLists()
   console.log(stateLists.value)
 })
 
@@ -46,33 +47,42 @@ const links = ref([
           <thead class="bg-gray-50 dark:bg-[#2f2b3d49] text-xs text-gray-700  uppercase dark:text-gray-400">
             <tr>
               <th scope="col" class="p-2 border border-gray-700 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                ID
+                № п/п
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Source of funding') }}
+                {{ $t('№ штата') }}
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('state number') }}
+                {{ $t('Источник финансирование') }}
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('uuid') }}
+                {{ $t('Uuid штата') }}
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('military unit') }}
+                {{ $t('Воинской часть') }}
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('military district') }}
+                {{ $t('Военной округ') }}
               </th>
               <th scope="col"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('directive code') }}
+                {{ $t('Номер принята директивы') }}
               </th>
-
+              <th scope="col"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('Дата принята директивы') }}
+              </th>
+              <th scope="col" class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('Номер отмены директивы') }}
+              </th>
+              <th scope="col" class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                {{ $t('Дата отмены директивы') }}
+              </th>
             </tr>
           </thead>
           <tbody class="dark:bg-[#2F3349FF] odd:bg-white odd:dark:bg-[#2F3349FF] even:bg-[#2F3349FF] even:dark:bg-[#2F3349FF] border-b dark:border-gray-700">
@@ -80,29 +90,31 @@ const links = ref([
               <td class="p-2 text-md font-normal text-black whitespace-nowrap border border-gray-700 dark:text-white">
                 <span class="font-semibold">{{ item.id }}</span>
               </td>
-              <td class="p-2 text-md font-normal text-black whitespace-nowrap border border-gray-700 dark:text-white">
-                <span class="font-semibold"></span>
-              </td>
               <td class="p-2 text-lg font-normal text-black font-medium border border-gray-700 whitespace-nowrap dark:text-white">
                 {{ item.state_number }}
               </td>
-              <td
-                  class="p-2 text-lg font-normal text-black font-medium border border-gray-700 whitespace-nowrap dark:text-white">
+              <td class="p-2 text-lg font-normal text-black font-medium border border-gray-700 whitespace-nowrap dark:text-white"></td>
+              <td class="p-2 text-lg font-normal text-black font-medium border border-gray-700 whitespace-nowrap dark:text-white">
                 {{ item.common_uuid }}
               </td>
-              <td
-                  class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
                 {{ item.military_unit }}
               </td>
-              <td
-                  class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
                 {{ item.military_district }}
               </td>
-              <td
-                  class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
-                {{ item.directive_code }}
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+                {{ directives.find(el=>el.id === item.directive_code )?.code }}
               </td>
-
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+                {{ directives.find(el=>el.id === item.directive_code )?.date_of_adoption }}
+              </td>
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+                {{ directives.find(el=>el.id === item.cancel_directive_code )?.code }}
+              </td>
+              <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+                {{ directives.find(el=>el.id === item.cancel_directive_code )?.date_of_adoption }}
+              </td>
             </tr>
           </tbody>
         </table>
