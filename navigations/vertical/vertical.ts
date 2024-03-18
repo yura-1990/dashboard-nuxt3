@@ -31,17 +31,17 @@ export const vertical = () => {
       children: [
         {
           title: 'states lists',
-          icon: { name: 'mingcute:book-5-line', size: '28' },
+          icon: { name: 'material-symbols:lists-rounded', size: '28' },
           to: '/states',
         },
         {
           title: '51',
-          icon: { name: 'mingcute:book-5-line', size: '28' },
+          icon: { name: 'ic:twotone-numbers', size: '28' },
           to: '/',
         },
         {
           title: '01',
-          icon: { name: 'mingcute:book-5-line', size: '28' },
+          icon: { name: 'ic:twotone-numbers', size: '28' },
           to: '/',
         },
 

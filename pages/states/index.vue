@@ -17,7 +17,6 @@ onMounted(async () => {
   initFlowbite()
   await getStateList()
   await getDirectiveLists()
-  console.log(stateLists.value)
 })
 
 async function getOneState(id: number){
@@ -30,6 +29,10 @@ const links = ref([
   {
     title: 'states',
     icon: { name: 'mingcute:book-5-line', size: '16' },
+  },
+  {
+    title: 'state-list',
+    icon: { name: 'mingcute:book-5-line', size: '16' },
     to: '/states',
   }
 ])
@@ -41,52 +44,96 @@ const links = ref([
     <div class="w-max my-3">
       <Breadcrumb :links="links" />
     </div>
-    <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
-      <div class="bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-3 dark:border-gray-700 overflow-hidden py-5 dark:bg-[#2F3349FF]">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg dark:text-gray-400">
-          <thead class="bg-gray-50 dark:bg-[#2f2b3d49] text-xs text-gray-700  uppercase dark:text-gray-400">
+    <div class="grid gap-4 rounded-lg xl:grid-cols-2 2xl:grid-cols-3">
+      <div class="bg-white table-height table-wrp block rounded-lg shadow-sm 2xl:col-span-3 dark:border-gray-700 dark:bg-transparent">
+        <table class="w-full text-sm text-left rtl:text-right rounded-lg dark:text-gray-400">
+          <thead class="sticky top-[49px] backdrop-blur-3xl z-50 bg-indigo-400 dark:bg-[#6D609B49] text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
-              <th scope="col" class="p-2 border border-gray-700 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                № п/п
+              <th scope="col" data-tooltip-target="tooltip-top1" data-tooltip-placement="top"
+                  class="p-2 border border-gray-700 text-xs font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('№ п/п') }}
+                <div id="tooltip-top1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('№ п/п') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('№ штата') }}
+              <th scope="col" data-tooltip-target="tooltip-top2" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('№ штата').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top2" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('№ штата') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Источник финансирование') }}
+              <th scope="col" data-tooltip-target="tooltip-top3" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Источник финансирование').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top3" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Источник финансирование') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Uuid штата') }}
+              <th scope="col" data-tooltip-target="tooltip-top4" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Uuid штата').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top4" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Uuid штата') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Воинской часть') }}
+              <th scope="col" data-tooltip-target="tooltip-top5" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Воинской часть').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top5" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Воинской часть') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Военной округ') }}
+              <th scope="col" data-tooltip-target="tooltip-top6" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Военной округ').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top6" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Военной округ') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Номер принята директивы') }}
+              <th scope="col" data-tooltip-target="tooltip-top7" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Номер принята директивы').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top7" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Номер принята директивы') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col"
-                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Дата принята директивы') }}
+              <th scope="col" data-tooltip-target="tooltip-top8" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Дата принята директивы').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top8" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Дата принята директивы') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col" class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Номер отмены директивы') }}
+              <th scope="col" data-tooltip-target="tooltip-top9" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Номер отмены директивы').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top9" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Номер отмены директивы') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
-              <th scope="col" class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                {{ $t('Дата отмены директивы') }}
+              <th scope="col" data-tooltip-target="tooltip-top10" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white ">
+                {{ $t('Дата отмены директивы').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
+                <div id="tooltip-top10" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Дата отмены директивы') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
               </th>
+              <th scope="col" class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white"></th>
             </tr>
           </thead>
           <tbody class="dark:bg-[#2F3349FF] odd:bg-white odd:dark:bg-[#2F3349FF] even:bg-[#2F3349FF] even:dark:bg-[#2F3349FF] border-b dark:border-gray-700">
-            <tr v-for="(item, index) in stateLists" :key="index" @click="getOneState(item.id)" class="bg-gray-100 cursor-pointer odd:bg-white odd:dark:bg-[#2F3349FF] even:dark:bg-[#2f2b3d49] even:dark:bg-[#2f2b3d49] border-b dark:border-gray-600">
+            <tr v-for="(item, index) in stateLists" :key="index"  class="bg-gray-100  hover:!bg-violet-600 active:!bg-violet-700 focus:!outline-none focus:!ring focus:ring-violet-300  cursor-pointer odd:bg-white odd:dark:bg-[#2F3349FF] even:dark:bg-[#2f2b3d49] even:dark:bg-[#2f2b3d49] border-b dark:border-gray-600">
               <td class="p-2 text-md font-normal text-black whitespace-nowrap border border-gray-700 dark:text-white">
                 <span class="font-semibold">{{ item.id }}</span>
               </td>
@@ -115,6 +162,9 @@ const links = ref([
               <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
                 {{ directives.find(el=>el.id === item.cancel_directive_code )?.date_of_adoption }}
               </td>
+              <td @click="getOneState(item.id)" class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+                <Icon name="clarity:eye-show-line"/>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -124,5 +174,7 @@ const links = ref([
 </template>
 
 <style scoped>
-
+.table-height{
+  min-height: calc(100vh - 148px);
+}
 </style>
