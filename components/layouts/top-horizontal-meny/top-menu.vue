@@ -10,7 +10,7 @@ import LangSwitcher from "~/components/language/LangSwitcher.vue";
     <div class="">
 
     </div>
-    <div class="flex gap-4">
+    <div class="flex gap-4 z-50">
       <LangSwitcher />
       <LazyThemesColorMode />
       <UserData />

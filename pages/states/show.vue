@@ -21,12 +21,12 @@ onMounted(()=>{
 const links = ref([
   {
     title: 'states',
-    icon: { name: 'ic:round-lock-person', size: '16' },
+    icon: { name: 'mingcute:book-5-line', size: '16' },
     to: '/states',
   },
   {
     title: 'show',
-    icon: { name: 'ic:round-lock-person', size: '16' },
+    icon: { name: 'clarity:eye-show-line', size: '16' },
     to: '/states/show',
   }
 ])
@@ -35,18 +35,18 @@ const links = ref([
 
 <template>
   <div>
-    <div class="w-max sticky z-50 top-0 my-3">
+    <div class="w-max sticky z-[5] top-0 my-3">
       <Breadcrumb :links="links" />
     </div>
-    <div class="grid gap-4 rounded-lg xl:grid-cols-2 2xl:grid-cols-3">
+    <div class="grid gap-4 rounded-lg xl:grid-cols-2 z-[4] 2xl:grid-cols-3">
       <div class="bg-transparent table-height table-wrp block rounded-lg shadow-sm 2xl:col-span-3 ">
         <table class="w-full text-sm text-left rtl:text-right rounded-lg dark:text-gray-400">
-          <thead class="sticky top-[48px] backdrop-blur-3xl z-50 bg-indigo-400 dark:bg-[#6D609B49] text-xs text-gray-700 uppercase dark:text-gray-400">
+          <thead class="sticky top-[48px] backdrop-blur-3xl z-[5] bg-indigo-400 dark:bg-[#6D609B49] text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
               <th scope="col" data-tooltip-target="tooltip-top1" data-tooltip-placement="top"
                   class="p-2 border border-gray-700  text-xs font-medium tracking-wider text-left text-dark uppercase dark:text-white">
                 {{ $t('Раздел').split(' ').map(el=>el.charAt(0)).join('').toUpperCase() }}
-                <div id="tooltip-top1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                <div id="tooltip-top1" role="tooltip" class="absolute z-50 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
                   {{ $t('Раздел') }}
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>

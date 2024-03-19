@@ -11,6 +11,7 @@ function findPermissionContainingBrowse(str: RouteRecordName | null | undefined)
 }
 export default defineNuxtRouteMiddleware(async(to, from) => {
     const foundPermission = findPermissionContainingBrowse(to.name);
+    console.log(to.name)
 
     if (!foundPermission){
         return navigateTo('/401')

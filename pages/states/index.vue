@@ -32,7 +32,7 @@ const links = ref([
   },
   {
     title: 'state-list',
-    icon: { name: 'mingcute:book-5-line', size: '16' },
+    icon: { name: 'material-symbols:lists-rounded', size: '16' },
     to: '/states',
   }
 ])
