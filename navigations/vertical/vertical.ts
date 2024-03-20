@@ -34,16 +34,19 @@ export const vertical = () => {
           title: 'states lists',
           icon: { name: 'material-symbols:lists-rounded', size: '18' },
           to: '/states',
+          permissions: ['Browse States'],
         },
         {
           title: '51',
           icon: { name: 'ic:twotone-numbers', size: '18' },
-          to: '/',
+          to: '/states/fiftyone',
+          permissions: ['Browse States-fiftyone'],
         },
         {
           title: '01',
           icon: { name: 'ic:twotone-numbers', size: '18' },
-          to: '/',
+          to: '/states/zero-one',
+          permissions: ['Browse States-zero-one'],
         },
       ]
     },

@@ -6,7 +6,8 @@ export const useReferenceStore = defineStore("references", {
         return {
             references: [],
             directives: [],
-            referenceEndpointLists: {}
+            referenceEndpointLists: {},
+            referenceKeys: {} ?? []
         };
     },
 
@@ -44,6 +45,7 @@ export const useReferenceStore = defineStore("references", {
             );
 
             this.referenceEndpointLists = await data.value
+            this.referenceKeys = Object.keys(await data.value[Object.keys(await data.value)[0]])
         },
     },
 });

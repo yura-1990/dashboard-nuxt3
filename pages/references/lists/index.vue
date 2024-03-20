@@ -20,8 +20,8 @@ onMounted(async () => {
   initFlowbite()
   await getReferenceList()
 })
-async function getEndpointReference(endpoint: string){
-  await getReferenceByEndpoint(endpoint)
+async function getEndpointReference(item: string){
+  await getReferenceByEndpoint(item.endpoint)
   await router.push('/references/show')
 }
 
@@ -76,7 +76,7 @@ const links = ref([
             <td class="p-2 text-lg font-normal text-black font-medium border border-gray-700 whitespace-nowrap dark:text-white">
               {{ item.title[locale] }}
             </td>
-            <td @click="getEndpointReference(item.endpoint)" class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+            <td @click="getEndpointReference(item)" class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
               <Icon name="clarity:eye-show-line"/>
             </td>
           </tr>
