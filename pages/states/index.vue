@@ -163,7 +163,7 @@ const links = ref([
                 {{ directives.find(el=>el.id === item.cancel_directive_code )?.date_of_adoption }}
               </td>
               <td @click="getOneState(item.id)" class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
-                <Icon name="clarity:eye-show-line"/>
+                <Icon name="clarity:eye-show-line" />
               </td>
             </tr>
           </tbody>
