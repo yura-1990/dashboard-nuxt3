@@ -4,10 +4,11 @@
         <ULink
             :to="item.to"
             class="flex items-center mb-1  py-2 pl-4 pr-3 w-full rounded "
+            :class="item.add ? 'justify-center hover:bg-purple-700 bg-purple-600' : ''"
             active-class="active-link text-white dark:text-white"
             inactive-class="text-black-700 dark:text-white-400 hover:bg-[#8692d00f] hover:text-white-700 dark:hover:text-black-900"
         >
-          <div class="flex gap-2 mr-auto" >
+          <div class="flex gap-2 mr-auto" :class="item.add ? props.hovering ? 'ml-auto' : '' : ''" >
             <div  class="w-[30px] flex items-center justify-center">
               <Icon :name="item.icon.name" :size="item.icon.size" />
             </div>

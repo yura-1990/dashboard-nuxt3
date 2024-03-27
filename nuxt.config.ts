@@ -1,9 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import path from "path";
+import fs from "fs";
+import os from 'os'
+
 export default defineNuxtConfig({
   $development: undefined, $env: undefined, $meta: undefined, $production: undefined, $test: undefined,
   devtools: { enabled: false },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
+  },
+
+  imports: {
+    dirs: [
+      // Scan top-level modules
+      'composables',
+      // ... or scan modules nested one level deep with a specific name and file extension
+      'composables/*/index.{ts,js,mjs,mts}',
+      // ... or scan all modules within given directory
+      'composables/**'
+    ]
   },
 
   modules: [

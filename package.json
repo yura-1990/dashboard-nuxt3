@@ -27,6 +27,7 @@
   "devDependencies": {
     "@nuxtjs/i18n": "^8.1.1",
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "nuxt-icon": "^0.6.8"
+    "nuxt-icon": "^0.6.8",
+    "vite-plugin-node-polyfills": "^0.21.0"
   }
 }

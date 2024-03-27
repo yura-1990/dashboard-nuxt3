@@ -6,8 +6,8 @@
     <div class=" w-[15.625rem] ">
       <ul class="h-[3.75rem] flex items-center px-5 justify-between ">
         <li class="w-[2.125rem]">
-          <NuxtImg 
-            class="w-[2.125rem] " 
+          <NuxtImg
+            class="w-[2.125rem] "
             src="assets/logo.svg"
             loading="lazy"
             decoding="auto"

@@ -67,9 +67,14 @@ export const vertical = () => {
           icon: { name: 'material-symbols:lists-rounded', size: '18' },
           permissions: ['Browse References-lists'],
           to: '/references/lists',
+        },
+        {
+          title: '',
+          icon: { name: 'material-symbols:note-stack-add', size: '18' },
+          to: '/references/adds',
+          add: true
         }
       ]
-
     },
   ]
 }
