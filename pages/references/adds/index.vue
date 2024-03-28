@@ -13,7 +13,12 @@ const form = ref({
 
 async function submit(){
   await importFile(form.value)
-  const { data } = await useFetch('/api/create')
+  const { data } = await useFetch('/api/create', {
+    method: 'post',
+    body: {
+      fileName: form.value.import_name
+    }
+  })
 
   console.log(data.value)
 }

@@ -1,6 +1,7 @@
-import path from 'node:path'
-import fs from 'node:fs'
-import os from 'node:os'
-export default defineEventHandler(async(event) => {
-    return path.join(os.homedir());
+import { createFile } from "~/composables/fileOperations";
+
+export default defineEventHandler(async (event) => {
+    const body = await readBody(event)
+    createFile(body.fileName)
+    return body.fileName
 });
