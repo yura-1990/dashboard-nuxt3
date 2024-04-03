@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/useAuthStore';
-const { userData, logUserOut, authenticated } = useAuthStore()
+const { userData, logUserOut } = useAuthStore()
 const router = useRouter();
 import { initFlowbite } from 'flowbite'
 
 onMounted(()=>initFlowbite())
 
 const logout = () => {
-  logUserOut()  
+  logUserOut()
   router.push('/auth/login/')
 }
 
@@ -21,9 +21,9 @@ const logout = () => {
           <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
         </button>
       </div>
-      
-      <div class="z-50 my-4 mt-10 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-[#2F3349FF] shadow-lg dark:divide-gray-500 hidden" id="dropdown-2" 
-        style="position: absolute; top:50px; inset: 0px auto auto 0px; transform: translate(1514px, 61px);" 
+
+      <div class="z-50 my-4 mt-10 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-[#2F3349FF] shadow-lg dark:divide-gray-500 hidden" id="dropdown-2"
+        style="position: absolute; top:50px; inset: 0 auto auto 0; transform: translate(1514px, 61px);"
         data-popper-placement="bottom"
       >
         <div class="px-4 py-3" role="none">
@@ -50,7 +50,7 @@ const logout = () => {
         </ul>
       </div>
     </div>
-  
+
 </template>
 
 <style>

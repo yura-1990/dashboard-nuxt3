@@ -6,9 +6,9 @@ definePageMeta({
 import { Breadcrumb } from '#components';
 import { initFlowbite } from 'flowbite'
 import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useRolesStore } from "~/store/useRolesStore";
 import { usePermissionsStore } from "~/store/usePermissionsStore";
-import { storeToRefs } from 'pinia';
 
 const { roleLists, error } = storeToRefs(useRolesStore())
 const { permissionLists } = storeToRefs(usePermissionsStore())
@@ -25,12 +25,16 @@ const roleForm = ref({
 
 onMounted(async () => {
   initFlowbite()
-  await getRoleList()
-  await getPermissionList()
+  if (roleLists.value.length === 0){
+    await getRoleList()
+  }
+
+  if (permissionLists.value.length === 0){
+    await getPermissionList()
+  }
 })
 
 async function createRoles(){
-  console.log(roleForm.value)
   await createRole(roleForm.value.descriptions, roleForm.value.permissions  )
   await getRoleList()
   roleForm.value = {

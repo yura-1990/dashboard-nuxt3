@@ -6,13 +6,15 @@ definePageMeta({
 })
 import { storeToRefs } from 'pinia';
 import { useUserListStore } from "~/store/useUserListStore";
+import {useCookie} from "nuxt/app";
 
 const { getOneUser } = useUserListStore()
 const { oneUser } = storeToRefs(useUserListStore());
-const userID = computed( () => useCookie('userId').value)
 
 onMounted(async ()=>{
-  await getOneUser(userID.value)
+  if (Object.keys(oneUser.value).length === 0){
+    await getOneUser(useCookie<number>('userId').value)
+  }
 
 })
 

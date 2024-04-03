@@ -12,7 +12,9 @@ const { getRoleList } = useSalaryManagementStore()
 const toggleTable = ref(false)
 
 onMounted(async () => {
-  await getRoleList()
+  if (salaryManagementLists.value.length === 0){
+    await getRoleList()
+  }
 })
 
 const links = ref([

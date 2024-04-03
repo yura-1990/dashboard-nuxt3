@@ -8,13 +8,13 @@
         <li class="w-[2.125rem]">
           <NuxtImg
             class="w-[2.125rem] "
-            src="assets/logo.svg"
+            src="images/logo.svg"
             loading="lazy"
             decoding="auto"
           />
         </li>
-        <li><div class="text-3xl">Vuexy</div></li>
-        <li><NuxtImg class="w-5 h-5"  @click="handleOpenCloseNavbar" :src="openClose ? 'assets/close.svg' : 'assets/open.svg'" loading="lazy" decoding="auto" /></li>
+        <li><div class="text-3xl">Feo</div></li>
+        <li><NuxtImg class="w-5 h-5"  @click="handleOpenCloseNavbar" :src="openClose ? 'images/close.svg' : 'images/open.svg'" loading="lazy" decoding="auto" /></li>
       </ul>
       <div class="px-2">
         <LayoutsNavigationsVerticalList :children="verticalNavigation" :hovering="hovering" />

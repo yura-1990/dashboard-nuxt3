@@ -14,7 +14,7 @@ export const useReferenceStore = defineStore("references", {
     actions: {
         getReferenceList: async function () {
             const token = useCookie("token")
-            const {data, pending, error}: any = await useFetch(
+            const {data}: any = await useFetch(
                 "http://localhost:8000/api/references/lists",
                 {
                     method: "get",
@@ -28,7 +28,7 @@ export const useReferenceStore = defineStore("references", {
             this.references = await data.value
         },
 
-        getReferenceByEndpoint: async function (endpoint:string) {
+        getReferenceByEndpoint: async function (endpoint:  string) {
             const token = useCookie("token")
             const referenceEndpoint = useCookie<string>("referenceEndpoint")
             referenceEndpoint.value = endpoint

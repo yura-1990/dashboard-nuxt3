@@ -3,7 +3,7 @@ import {defineStore} from "pinia";
 export const useRolesStore = defineStore("roles", {
     state: () => {
         return {
-            roleLists: {},
+            roleLists: [],
             error: null,
         };
     },
@@ -11,7 +11,7 @@ export const useRolesStore = defineStore("roles", {
     actions: {
         getRoleList: async function () {
             const token = useCookie("token")
-            const {data, pending, error}: any = await useFetch(
+            const { data }: any = await useFetch(
                 "http://localhost:8000/api/roles/get-all",
                 {
                     method: "get",

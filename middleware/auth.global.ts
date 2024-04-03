@@ -4,8 +4,6 @@ export default defineNuxtRouteMiddleware(async(to, from) => {
   const decode = useAuthStore()
   const token = useCookie('token');
 
-
-
   if (token.value) {
     let user = await decode.decodeJwtToken(token.value)
     decode.userData = user.userData

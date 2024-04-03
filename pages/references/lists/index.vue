@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useStatesStore} from "~/store/useStatesStore";
-
 definePageMeta({
   middleware: ['ability']
 })
@@ -10,7 +8,7 @@ import { onMounted } from 'vue';
 import { useReferenceStore } from "~/store/useReferenceStore";
 import { storeToRefs } from 'pinia';
 import { useRouter } from "vue-router";
-const { locale, locales } = useI18n()
+const { locale } = useI18n()
 
 const { references } = storeToRefs(useReferenceStore());
 const { getReferenceList, getReferenceByEndpoint } = useReferenceStore()
@@ -18,9 +16,12 @@ const router = useRouter()
 
 onMounted(async () => {
   initFlowbite()
-  await getReferenceList()
+
+  if (references.value.length === 0){
+    await getReferenceList()
+  }
 })
-async function getEndpointReference(item: string){
+async function getEndpointReference(item: { endpoint: string }){
   await getReferenceByEndpoint(item.endpoint)
   await router.push('/references/show')
 }

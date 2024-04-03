@@ -3,29 +3,31 @@ definePageMeta({
   middleware: ['children']
 })
 
-import { onMounted, computed, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { initFlowbite } from 'flowbite'
 import { useStatesStore } from "~/store/useStatesStore";
 import { storeToRefs } from 'pinia';
+import {useCookie} from "nuxt/app";
 
 const { state } = storeToRefs(useStatesStore());
 const { getStateByID } = useStatesStore()
-const stateID = computed<number>(()=> useCookie('stateID').value )
+const stateID = ref(useCookie<number>('stateID').value )
 const zeroOne = ref()
 
 onMounted(async ()=>{
   await getStateByID(stateID.value)
   initFlowbite()
-  zeroOne.value = duplicateElements(await state.value)
+  zeroOne.value = duplicateElements(state.value)
+  console.log(zeroOne.value)
 })
 
-function duplicateElements(array: any[]) {
+function duplicateElements(array: any) {
   const newArray: any[] = [];
-  array.forEach(obj => {
+  array.forEach((obj: { [x: string]: number; }) => {
     const value = obj["01"];
     if (value > 1) {
       for (let i = 1; i < value; i++) {
-        const newObj = { ...obj }; // Clone the object
+        const newObj = {...obj}; // Clone the object
         newObj["01"] = 1; // Reset the value of "51" to 1 in the clone
         newArray.push(newObj);
       }
@@ -33,6 +35,7 @@ function duplicateElements(array: any[]) {
     obj["01"] = 1;
     newArray.push(obj);
   });
+
   return newArray;
 }
 

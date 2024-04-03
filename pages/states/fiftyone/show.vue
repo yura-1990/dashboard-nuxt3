@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {integer} from "vscode-languageserver-types";
-
 definePageMeta({
   middleware: ['children']
 })
@@ -9,16 +7,17 @@ import { onMounted, computed, ref } from "vue";
 import { initFlowbite } from 'flowbite'
 import { useStatesStore } from "~/store/useStatesStore";
 import { storeToRefs } from 'pinia';
+import {useCookie} from "nuxt/app";
 
 const { state } = storeToRefs(useStatesStore());
 const { getStateByID } = useStatesStore()
-const stateID = computed<number>(()=> useCookie('stateID').value )
+const stateID = ref<number>(useCookie<number>('stateID').value )
 const fiftyone = ref()
 
 onMounted(async ()=>{
-  await getStateByID(stateID.value)
-  initFlowbite()
-  fiftyone.value = duplicateElements(await state.value)
+    await getStateByID(stateID.value)
+    initFlowbite()
+    fiftyone.value = duplicateElements(await state.value)
 })
 
 function duplicateElements(array: any[]) {

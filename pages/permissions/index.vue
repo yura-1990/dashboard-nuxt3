@@ -11,7 +11,7 @@ import { usePermissionsStore } from '~/store/usePermissionsStore';
 
 const { permissionLists } = storeToRefs(usePermissionsStore())
 const { getPermissionList, createPermission } = usePermissionsStore()
-const { locale, locales } = useI18n()
+const { locales } = useI18n()
 const toast = useToast()
 
 const permissionForm = ref({
@@ -22,8 +22,9 @@ const permissionForm = ref({
 
 onMounted( async () => {
   initFlowbite()
-  await getPermissionList()
-  
+  if (permissionLists.value.length === 0){
+    await getPermissionList()
+  }
 })
 
 async function createPermissions(){
@@ -176,7 +177,7 @@ const links = ref([
             </div>
           </div>
           <div>
-            
+
           </div>
           <div class="flex justify-end">
             <button data-tooltip-target="tooltip-create"  @click="createPermissions" type="button" class="text-white active-link focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800">

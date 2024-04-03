@@ -44,8 +44,13 @@ const form = ref<UserCreateInterface>({
 })
 
 onMounted(async () => {
-  await getUserList(page.value)
-  await getRoleList()
+  if (Object.keys(userLists.value).length === 0){
+    await getUserList(page.value)
+  }
+
+  if (roleLists.value.length === 0){
+    await getRoleList()
+  }
   initFlowbite();
 })
 

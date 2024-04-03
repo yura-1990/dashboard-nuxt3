@@ -12,18 +12,21 @@ import { useRouter } from "vue-router";
 const { stateLists, directives } = storeToRefs(useStatesStore());
 const { getStateList, getStateByID, getDirectiveLists } = useStatesStore()
 const router = useRouter()
-const fiftyone = computed(()=>{
-  return 'salom'
-})
 
 onMounted(async () => {
   initFlowbite()
-  await getStateList()
-  await getDirectiveLists()
+  if ( stateLists.value.length === 0 ){
+    await getStateList()
+  }
+
+  if (directives.value.length === 0){
+    await getDirectiveLists()
+  }
 })
 
 async function getOneState(id: number){
-  await getStateByID(id)
+  const stateID = useCookie<number>("stateID")
+  stateID.value = id
   await router.push('/states/fiftyone/show')
 }
 

@@ -39,7 +39,7 @@ export const useUserListStore = defineStore("userList", {
 
         getOneUser: async function(id: number){
             const token = useCookie("token")
-            const userId = useCookie('userId')
+            const userId = useCookie<number>('userId')
             const {data, pending, error}: any = await useFetch(
                 `http://localhost:8000/api/users/show/${id}`,
                 {

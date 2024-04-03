@@ -221,9 +221,6 @@
 definePageMeta({
   middleware: ['ability']
 })
+
 </script>
-<style scoped>
-  .hhh{
-    color: #2f2b3d49;
-  }
-</style>
+<style scoped></style>

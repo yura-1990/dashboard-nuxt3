@@ -15,12 +15,18 @@ const router = useRouter()
 
 onMounted(async () => {
   initFlowbite()
-  await getStateList()
-  await getDirectiveLists()
+  if ( stateLists.value.length === 0 ){
+    await getStateList()
+  }
+
+  if (directives.value.length === 0){
+    await getDirectiveLists()
+  }
 })
 
 async function getOneState(id: number){
-  await getStateByID(id)
+  const stateID = useCookie<number>("stateID")
+  stateID.value = id
   await router.push('/states/zero-one/show')
 }
 

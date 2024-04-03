@@ -1,19 +1,23 @@
 <script setup lang="ts">
+import {useCookie} from "nuxt/app";
+
 definePageMeta({
   middleware: ['children']
 })
 
-import { onMounted, computed } from "vue";
+import { onMounted } from "vue";
 import { initFlowbite } from 'flowbite'
 import { useStatesStore } from "~/store/useStatesStore";
 import { storeToRefs } from 'pinia';
 
 const { state } = storeToRefs(useStatesStore());
 const { getStateByID } = useStatesStore()
-const stateID = computed<number>(()=> useCookie('stateID').value )
+const stateID = ref(useCookie<number>("stateID").value)
 
 onMounted(()=>{
-  getStateByID(stateID.value)
+  if (state.value.length === 0){
+    getStateByID(stateID.value)
+  }
   initFlowbite()
 })
 

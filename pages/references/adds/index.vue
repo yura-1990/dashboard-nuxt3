@@ -1,31 +1,34 @@
 <script setup lang="ts">
-import { useImportStore } from "~/store/useImportStrore";
-import { storeToRefs } from 'pinia';
+import { useImportsStore } from "~/store/useImportsStore";
 import {ref} from "vue";
+import {reloadNuxtApp} from "#app";
+import {useCookie} from "nuxt/app";
 
-
-const { importFile } = useImportStore()
-const { dataImportedFile } = storeToRefs(useImportStore())
+const token = useCookie("token")
+const { importFile } = useImportsStore()
 const form = ref({
   import_name: '',
   import: null
 })
 
 async function submit(){
-  await importFile(form.value)
   const { data } = await useFetch('/api/create', {
     method: 'post',
     body: {
-      fileName: form.value.import_name
+      fileName: form.value.import_name,
+      importFile: form.value.import,
+      token: token.value
     }
   })
 
-  console.log(data.value)
+  if (data.value?.status){
+    await importFile(form.value)
+    reloadNuxtApp({ path: `/references/${form.value.import_name.trim()}`})
+  }
 }
 
 function uploadFile(e: any){
   form.value.import = e.target.files[0]
-
 }
 
 </script>

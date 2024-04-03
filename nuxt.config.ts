@@ -1,14 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import path from "path";
-import fs from "fs";
-import os from 'os'
-
 export default defineNuxtConfig({
   $development: undefined, $env: undefined, $meta: undefined, $production: undefined, $test: undefined,
   devtools: { enabled: false },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
+
+  ssr: true,
 
   imports: {
     dirs: [

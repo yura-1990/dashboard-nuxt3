@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-[#f8f7faea] dark:bg-[#2f2b3dc7]  flex">
+    <div class="bg-[#f8f7faea] dark:bg-[#2f2b3dc7]  flex">
       <div class="h-screen relative">
         <LayoutsNavigationsVertical />
       </div>
@@ -8,12 +8,11 @@
         <layouts-top-horizontal-meny-top-menu />
         <slot />
       </div>
-    </section>
+    </div>
 </template>
 <script setup lang="ts">
 import { useAuthStore } from '~/store/useAuthStore';
 import { onMounted } from "vue";
-
 
 const toast = useToast()
 const userData = useAuthStore()
