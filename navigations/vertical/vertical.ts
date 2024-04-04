@@ -124,6 +124,38 @@ export const vertical = () => {
                 "to": "/references/lists"
             },
             {
+                "title": "group",
+                "icon": {
+                    "name": "material-symbols:lists-rounded",
+                    "size": "18"
+                },
+                "to": "/references/group"
+            },
+            {
+                "title": "subgroup",
+                "icon": {
+                    "name": "material-symbols:lists-rounded",
+                    "size": "18"
+                },
+                "to": "/references/subgroup"
+            },
+            {
+                "title": "tarifniy_razryat",
+                "icon": {
+                    "name": "material-symbols:lists-rounded",
+                    "size": "18"
+                },
+                "to": "/references/tarifniy_razryat"
+            },
+            {
+                "title": "doljnostnoy_oklad",
+                "icon": {
+                    "name": "material-symbols:lists-rounded",
+                    "size": "18"
+                },
+                "to": "/references/doljnostnoy_oklad"
+            },
+            {
                 "title": "",
                 "icon": {
                     "name": "material-symbols:note-stack-add",
