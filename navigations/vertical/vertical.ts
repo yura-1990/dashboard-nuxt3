@@ -165,6 +165,17 @@ export const vertical = () => {
                 "add": true
             }
         ]
-    }
+    },
+      {
+          "title": "Card",
+          "icon": {
+              "name": "eos-icons:cluster-management-outlined",
+              "size": "28"
+          },
+          "permissions": [
+              "Browse Salary-management"
+          ],
+          "to": "/carts"
+      },
 ]
 }

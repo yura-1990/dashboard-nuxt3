@@ -79,7 +79,6 @@ export const useAuthStore = defineStore("auth", {
 
     async decodeJwtToken(token: string | null | undefined) {
       try {
-        // @ts-ignore
         const [, payloadBase64] = token.split('.');
         return JSON.parse(atob(payloadBase64));
 

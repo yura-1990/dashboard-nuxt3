@@ -15,7 +15,7 @@ onMounted(()=>initFlowbite())
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: 0.1s linear;
+  //transition: 0.1s linear;
 }
 .page-enter-from,
 .page-leave-to {

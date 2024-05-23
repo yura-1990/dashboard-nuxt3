@@ -15,12 +15,12 @@ const { getStateByID } = useStatesStore()
 const stateID = ref(useCookie<number>("stateID").value)
 
 onMounted(()=>{
-  if (state.value.length === 0){
-    getStateByID(stateID.value)
-  }
-  initFlowbite()
-})
 
+  getStateByID(stateID.value)
+  initFlowbite()
+
+  console.log(state)
+})
 
 const links = ref([
   {
@@ -79,6 +79,32 @@ const links = ref([
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
               </th>
+
+              <th scope="col" data-tooltip-target="tooltip-top4" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('ФИО') }}
+                <div id="tooltip-top4" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('ФИО') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              </th>
+              <th scope="col" data-tooltip-target="tooltip-top4" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('ПНФЛ') }}
+                <div id="tooltip-top4" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('ПНФЛ') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              </th>
+              <th scope="col" data-tooltip-target="tooltip-top4" data-tooltip-placement="top"
+                  class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
+                {{ $t('Паспорт коде') }}
+                <div id="tooltip-top4" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white rounded-lg shadow-sm opacity-0 tooltip bg-[#6366f1]">
+                  {{ $t('Паспорт коде') }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              </th>
+
               <th scope="col" data-tooltip-target="tooltip-top5" data-tooltip-placement="top"
                   class="p-2 text-xs border border-gray-700 font-medium tracking-wider text-left text-dark uppercase dark:text-white">
                 {{ $t('01') }}
@@ -170,6 +196,24 @@ const links = ref([
                 class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
               {{ item.rank_code }}
             </td>
+
+            <td
+                class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+<!--              <div v-for="item in item.people[Object.keys(item.people)]">-->
+<!--                {{ item.firstName }} {{ item.lastName }} {{ item.middleName }}-->
+<!--              </div>-->
+            </td>
+            <td  class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+<!--              <div v-for="item in item.people[Object.keys(item.people)]">-->
+<!--                {{ item.pinfl }}-->
+<!--              </div>-->
+            </td>
+            <td  class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
+<!--                <div v-for="item in item.people[Object.keys(item.people)]">-->
+<!--                  {{ item.personalNumber }}-->
+<!--                </div>-->
+            </td>
+
             <td class="p-2 text-lg font-normal text-gray-900 whitespace-nowrap border border-gray-700 dark:text-white">
               {{ item['01'] }}
             </td>
